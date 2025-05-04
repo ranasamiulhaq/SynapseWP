@@ -9,7 +9,7 @@ class Synapse_Public_Chat {
         wp_enqueue_script('synapse-chat-script', plugin_dir_url(__DIR__) . 'public/js/chat-scripts.js', [], false, true);
         
         $site_id = get_option('your_plugin_site_id');
-        wp_localize_script('synapse-admin-upload', 'faqbotData', ['site_id' => $site_id]);
+        wp_localize_script('synapse-chat-script', 'faqbotData', ['site_id' => $site_id]);
     }
 
     public static function add_chat_html() {

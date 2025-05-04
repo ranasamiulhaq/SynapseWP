@@ -11,8 +11,8 @@
             <div class="header-info">
                 
                 <div class="bot-details">
-                    <span class="bot-name">LeadBot</span>
-                    <span class="bot-status">● Online Now</span>
+                    <span class="bot-name">Synapse Bot</span>
+                    <span class="bot-status">Online Now</span>
                 </div>
             </div>
            
