@@ -90,7 +90,7 @@
                 wooSuccessIndicator.style.display = 'inline-block';
                 const displayDiv = document.getElementById('products-display');
                 if (displayDiv) {
-                    displayDiv.innerHTML = "<span class='success-message'>✅ Products sent to backend!</span>";
+                    displayDiv.innerHTML = "<span class='success-message'>✅ Bot is Ready to use !</span>";
                 }
                 console.log('Backend response:', backendData);
                 // Optionally reset the success indicator after a short delay
@@ -182,3 +182,21 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('agreement-checkbox');
+        const fetchProductsBtn = document.getElementById('fetch-products-btn');
+        const form = document.getElementById('woo-config-form');
+
+        checkbox.addEventListener('change', function() {
+            fetchProductsBtn.disabled = !this.checked;
+        });
+
+        fetchProductsBtn.addEventListener('click', function() {
+            if (checkbox.checked) {
+                form.submit(); // Only submit the form if the checkbox is checked
+            } else {
+                alert('Please check the box to agree before proceeding.'); // Optional: Inform the user
+            }
+        });
+    });

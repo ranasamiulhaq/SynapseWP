@@ -48,6 +48,12 @@
     height: auto;
 }
 
+.Woo-image img {
+    max-width: 90%;
+    height: auto;
+    justify-content: flex-end;
+}
+
 .badge-new {
     background:rgb(64, 164, 222);
     color: #fff;
@@ -127,12 +133,18 @@ border-radius: 14px;
 padding: 30px;
 box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
 transition: all 0.3s ease;
+display: flex;
+flex: column;
+ 
 }
 
 .modern-card:hover {
 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
+.card-content{
+width: 50% ;
+}
 /* Card Header */
 .card-header h2 {
 font-size: 24px;
@@ -181,20 +193,32 @@ text-align: right;
 }
 
 .card-form .button-primary {
-background-color: #266cc0;
-color: #fff;
-padding: 10px 20px;
-font-size: 15px;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-transition: background 0.2s ease;
+    background-color: #3498db; /* A more vibrant blue */
+    color: #ffffff;
+    padding: 12px 24px; /* Slightly more padding */
+    font-size: 16px; /* Slightly larger font */
+    border: none;
+    border-radius: 10px; /* More rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smoother transitions and added transform/shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .card-form .button-primary:hover {
-background-color: #1f5a9d;
+    background-color: #2980b9; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
+.card-form .button-primary:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4); /* Custom focus ring */
+}
+
+.card-form .button-primary:active {
+    transform: translateY(0); /* Reset transform on active */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow on active */
+}
 
 
 input[type="file"],
