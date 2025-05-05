@@ -5,9 +5,9 @@
     const userInput = document.getElementById('faqbot-user-input');
     const chatBody = document.getElementById('faqbot-chat-body');
     const chatBodyScroll = document.getElementById('faqbot-chat-body-scroll');
-    const chatStorageKey = 'faqbotChatHistory'; // Key to store chat history in localStorage
+    const chatStorageKey = 'faqbotSessionChatHistory'; // Key for sessionStorage
 
-    // Function to save chat history to localStorage
+    // Function to save chat history to sessionStorage
     function saveChatHistory() {
         const messages = Array.from(chatBody.children).map(messageDiv => {
             return {
@@ -16,12 +16,12 @@
                 className: messageDiv.className // Save classes for styling
             };
         });
-        localStorage.setItem(chatStorageKey, JSON.stringify(messages));
+        sessionStorage.setItem(chatStorageKey, JSON.stringify(messages));
     }
 
-    // Function to load chat history from localStorage
+    // Function to load chat history from sessionStorage
     function loadChatHistory() {
-        const storedHistory = localStorage.getItem(chatStorageKey);
+        const storedHistory = sessionStorage.getItem(chatStorageKey);
         if (storedHistory) {
             const parsedHistory = JSON.parse(storedHistory);
             parsedHistory.forEach(message => {
@@ -56,6 +56,13 @@
                 scrollToBottom();
                 saveChatHistory(); // Save after user message
 
+                // Prepare chat history to send
+                const chatHistoryElements = Array.from(chatBody.children);
+                const chatHistory = chatHistoryElements.map(el => ({
+                    sender: el.classList.contains('user-message') ? 'user' : 'bot',
+                    text: el.textContent
+                }));
+
                 // Display loading animation
                 const botMessageDiv = document.createElement('div');
                 botMessageDiv.classList.add('bot-message', 'loading'); // Add 'loading' class
@@ -63,7 +70,7 @@
                 chatBody.appendChild(botMessageDiv);
                 scrollToBottom();
 
-                // Send message to backend
+                // Send message to backend with chat history
                 fetch('http://localhost:8000/plugin/chat', {
                     method: 'POST',
                     headers: {
@@ -71,7 +78,8 @@
                     },
                     body: JSON.stringify({
                         site_id: faqbotData.site_id,
-                        message: message
+                        message: message,
+                        chat_history: chatHistory // Include the chat history
                     })
                 })
                 .then(response => {
